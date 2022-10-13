@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>lịch</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+</head>
+<body>
+ 		<div class="anh-1" ><img src="https://pystravel.vn/uploads/posts/albums/1183/15f0382cfb87dc31ddab1bef25b3147d.jpg" id="anh_1" class="anh1"></div>
+ 		<div id="good" class="good1" style="text-align: center;margin-top: 30px;font-size: 20px;color: red;"></div>
+ 		<div id="dong_ho" class="clock" onload="gettime()"> </div>
+ 		<script type="text/javascript">
+ 			var anh_1 = document.getElementById('anh_1')
+ 			var images = ["https://anhdepblog.com/wp-content/uploads/2018/01/hinh-nen-bau-troi-day-sao-dep-65.jpg" ]
+ 				var today = new Date();
+ 				var hrs =today.getHours();
+ 					if(hrs >=18 || hrs<=6)
+ 				 	anh_1.src = images
+ 			var good = document.getElementById("good")
+ 			   if(hrs>=6 && hrs<12){
+ 			   		good.innerHTML = "GOOD MORNING"
+ 			   		good.style.color = "blue"
+                }
+   				else 
+   					if(hrs>=12 && hrs<18){
+   					good.innerHTML = "GOOD AFTERNOON"
+   					}
+   					else{
+   					good.innerHTML = "GOOD EVENING"
+   					good.style.color = "black"
+ 					}
+ 		</script>
+ 		<!-- đồng hồ -->
+ 		<script type="text/javascript">
+ 			function gettime() {
+ 			var dong_ho = document.getElementById("dong_ho")
+ 			var date = new Date();
+ 			var h = date.getHours();
+ 			var m =date.getMinutes();
+ 			var s = date.getSeconds();
+ 			var session = "AM"
+ 			 if(h>=12 && h<=23){
+ 			 	session = "PM"}
+ 			 h = (h<10)?'0'+h:h
+ 			 m = (m<10)?'0'+m:m
+ 			 s = (s<10)?'0'+s:s
+ 			 var time = h+':'+m+':'+s+" "+session
+ 			 dong_ho.innerText = time;
+ 			 setTimeout(gettime,1000)
+
+ 			 }
+ 			
+ 			 gettime();
+ 		</script>
+</body>
+</html>

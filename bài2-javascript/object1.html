@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> biến</title>
+	<meta charset="utf-8">
+
+</head>
+<body>
+	<script type="text/javascript">
+		var bien1 = 1;  // chú ý khi đặt tên biến chữ cái đầu tiên k thể là số
+		alert(bien1); //xuất hiện hộp thoại để thông báo
+		bien1 = bien1 + '1';  // chú ý number +string =string
+		alert(bien1);
+		test = typeof(bien1);  //hàm typeof để kiểm tra kiểu dữ liệu
+		alert(test);
+		console.log(bien1);  //hàm chạy gầm dưới trang web
+		var name = prompt("mời bạn nhập tên",''); //hàm prompt xuất hiện hộp thoại mà bạn phải nhập dữ liệu vào
+		alert(name);
+		confirm("tên bạn có phải là " +name+ ' không'); //hàm comfrim xuất hiện hộp thoại xác nhận 
+		var a = 10; //biến toàn cục có thể sử dụng đc ở mọi chỗ
+		function demmo() { //phần định nghiã hàm
+			var a = 9; //biến cục bộ chỉ đc sử dụng trong phần định nghĩa hàm
+			alert(a);
+			// body...
+		}
+		alert('giá trị của x là' +a);
+
+	</script>
+
+</body>
+</html>

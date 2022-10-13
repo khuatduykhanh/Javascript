@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>máy tính</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="calculator">
+  <div class="input" id="input"></div>
+  <div class="buttons">
+    <div class="operators">
+      <div>+</div>
+      <div>-</div>
+      <div>&times;</div>
+      <div>&divide;</div>
+      <div>%</div>
+    </div>
+    <div class="leftPanel">
+      <div class="numbers">
+        <div>7</div> <!-- number[0] -->
+        <div>8</div>  <!-- number[1] -->
+        <div>9</div> <!-- number[2] -->
+      </div>
+      <div class="numbers">
+        <div>4</div><!-- number[3] -->
+        <div>5</div><!-- number[4] -->
+        <div>6</div><!-- number[5] -->
+      </div>
+      <div class="numbers">
+        <div>1</div><!-- number[6] -->
+        <div>2</div><!-- number[7] -->
+        <div>3</div><!--number [8] -->
+      </div>
+      <div class="numbers">
+        <div>0</div><!-- number[9] -->
+        <div>.</div><!-- number[10] -->
+        <div id="clear">C</div><!-- number[11] -->
+      </div>
+    </div>
+    <div class="equal" id="result">=</div>
+  </div>
+</div>
+<script type="text/javascript">
+	var input = document.getElementById('input'), // input/output button
+  number = document.querySelectorAll('.numbers div'), // querySelectorAll là hàm sẽ lấy ra các phần tử có chung một css tạo thành một mảng .numbers-class trong css lấy các thẻ div trong class number
+  operator = document.querySelectorAll('.operators div'), // operator buttons
+  result = document.getElementById('result'), // equal button
+  clear = document.getElementById('clear'), // clear button
+  resultDisplayed = false; // flag to keep an eye on what output is displayed
+// adding click handlers to number buttons
+for (var i = 0; i < number.length; i++) {
+  number[i].addEventListener("click", function(k) {
+     
+    // storing current input string and its last character in variables - used later
+    var currentString = input.innerHTML;
+    var lastChar = currentString[currentString.length - 1];
+    // if result is not diplayed, just keep adding
+    if (resultDisplayed === false) {
+      input.innerHTML += k.target.innerHTML;
+
+    } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷" ||lastChar === "%" ) {
+      // if result is currently displayed and user pressed an operator
+      // we need to keep on adding to the string for next operation
+      resultDisplayed = false;
+      input.innerHTML += k.target.innerHTML;
+    } else {
+      // if result is currently displayed and user pressed a number
+      // we need clear the input string and add the new input to start the new opration
+      resultDisplayed = false;
+      input.innerHTML = "";
+      input.innerHTML += k.target.innerHTML;
+    }
+
+  });
+}
+
+// adding click handlers to number buttons
+for (var i = 0; i < operator.length; i++) {
+  operator[i].addEventListener("click", function(k) {
+
+    // storing current input string and its last character in variables - used later
+    var currentString = input.innerHTML;
+    var lastChar = currentString[currentString.length - 1];
+    // if last character entered is an operator, replace it with the currently pressed one
+    if (lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷" || lastChar === "%") {
+      var newString = currentString.substring(0, currentString.length - 1) + k.target.innerHTML;
+      input.innerHTML = newString;
+    } else if (currentString.length == 0) {
+      // if first key pressed is an opearator, don't do anything
+      console.log("enter a number first");
+    } else {
+      // else just add the operator pressed to the input
+      input.innerHTML += k.target.innerHTML;
+    }
+
+  });
+}
+
+// on click of 'equal' button
+result.addEventListener("click", function() {
+  // this is the string that we will be processing eg. -10+26+33-56*34/23
+  var inputString = input.innerHTML;
+
+  // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
+  var numbers = inputString.split(/\+|\-|\×|\÷|\%/g);// bỏ các dấu +,-,x,/ trong chuỗi vưa nhập 
+
+  // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
+  // first we replace all the numbers and dot with empty string and then split
+  var operators = inputString.replace(/[0-9]|\./g, "").split("");
+
+  console.log(inputString+'1');
+  console.log(operators+'2');
+  console.log(numbers);
+  console.log("----------------------------");
+
+  // now we are looping through the array and doing one operation at a time.
+  // first divide, then multiply, then subtraction and then addition
+  // as we move we are alterning the original numbers and operators array
+  // the final element remaining in the array will be the output
+  var chiadu = operators.indexOf("%");
+  while (chiadu != -1) {
+
+    numbers.splice(chiadu, 2, numbers[chiadu] % numbers[chiadu + 1]);
+    operators.splice(chiadu, 1);
+    chiadu = operators.indexOf("%");
+  }
+
+  var divide = operators.indexOf("÷");
+  console.log(divide);
+  while (divide != -1) {
+
+    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
+    operators.splice(divide, 1);
+    divide = operators.indexOf("÷");
+    console.log(divide+"khanh");
+  }
+
+  var multiply = operators.indexOf("×");
+  while (multiply != -1) {
+    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
+    operators.splice(multiply, 1);
+    multiply = operators.indexOf("×");
+  }
+
+  var subtract = operators.indexOf("-");
+  while (subtract != -1) {
+    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
+    operators.splice(subtract, 1);
+    subtract = operators.indexOf("-");
+  }
+
+  var add = operators.indexOf("+");
+  while (add != -1) {
+    // using parseFloat is necessary, otherwise it will result in string concatenation :)
+    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));//parsefloat ép chuỗi ký tự sang sang kiểu số 
+    operators.splice(add, 1);
+    add = operators.indexOf("+");
+  }
+
+  input.innerHTML = numbers[0]; // displaying the output
+
+  resultDisplayed = true; // turning flag if result is displayed
+});
+
+// clearing the input on press of clear
+clear.addEventListener("click", function() {
+  input.innerHTML = "";
+})
+</script>
+
+</body>
+</html>

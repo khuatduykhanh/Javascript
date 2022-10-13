@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DOM</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+</head>
+<body>
+	<!-- truy xuất nút từng thẻ html lấy thuộc tính -->
+	<input type="text" id="input_1" value="1" gia_tri="3" >   <!-- tạo ra thuộc tính mới gia_tri =3  thuộc tính readonly cho biết văn bản đó có thể xoá và thay đổi không readonly mặc định là có thể xoá và thay thế đc--> 
+	<div class="mau" id="kq_input1">ABC</div>
+	<!-- thay đổi thuộc tính cho nút-->
+	 <button class="nut" onclick="readonly()">set readonly</button>. <!--khi kích vào nút set readonly thì hàm readonly() sẽ đc kích hoạt -->
+	 <!-- thêm một cái thẻ h1 vào trong thẻ div -->
+	 <div id="them_vao_day"></div>
+	 <!-- lấy ra css và thay đổi thuộc tính của css -->
+	 <div id="div_css" style="margin: 50px;padding: 10px; height: 50px; background-color:red ;"></div>
+	 <button id="thay_doi" class="nut" onclick="thaydoims()">Bấm vô đây</button>
+	<script type="text/javascript">
+		var input_1 = document.getElementById('input_1') // gán cái thẻ có id input_1 vào biến input_1
+		var input_1_value = input_1.value  //gán giá trị trong value của thẻ input
+		console.log(input_1); //hiện ra màn hình cái thẻ input
+		console.log(input_1_value); //truy xuất đến giá trị của value trong thẻ input
+		var input_1_gia_tri = input_1.getAttribute('gia_tri'); //hàm getAttribute lấy giá trị của thuộc tính 
+		console.log(input_1_gia_tri);
+		var div_input_1 = document.getElementById('kq_input1')
+		// div_input_1.innerHTML = input_1_value; //hàm innerHTML để ghi văn bản vào thẻ có id kq_input1 (thẻ div)
+		var html = div_input_1.innerHTML // gán văn bản bên trong thẻ div vào html
+		console.log(html); // in ra console.log ABC
+	</script>
+	<script type="text/javascript"> 
+		function readonly() {  //hàm readonly
+	       var input_1 = document.getElementById('input_1') 
+		    input_1.setAttribute('readonly',true); // hàm setAttribute thay đổi giá trị cho thuộc tính thuộc tính readonly thay bằng true
+		}
+	</script>
+	<script type="text/javascript">
+		var them_vao_day = document.getElementById("them_vao_day")
+		var h1 = document.createElement(h1); //tạo một thẻ h1 
+		h1.innerHTML = "Thẻ H1 được thêm vào" // ghi vào thẻ h1 dòng thẻ h1 được thêm vào
+		them_vao_day.appendChild(h1);  //thêm một thẻ h1 vào thẻ div(id them_vao_day)
+	</script>
+	<!-- <script type="text/javascript">
+		var div_css = document.getElementById("div_css") 
+		     div_css1 = div_css.style.margin //lấy giá trị margin trong thuộc tính style 
+		     console.log(div_css1);
+		     div_css.style.backgroundColor = "blue" //thay đổi backgroundcolor cho style
+	</script> -->
+	<script type="text/javascript">
+		function thaydoims() {
+			var div_css = document.getElementById("div_css") 
+			div_css.style.backgroundColor = "blue";
+		}
+	</script>
+
+
+</body>
+</html>

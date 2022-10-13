@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ảnh</title>
+	<meta charset="utf-8">
+
+</head>
+<body>
+		<div>
+    <img id="slider" src="https://raw.githubusercontent.com/ichte/Planets-Android-Learning/master/earth.jpg">
+    <button onclick="prev()"> Ảnh trước </button>
+    <button onclick="next()"> Ảnh sau </button>
+</div>
+
+<script>
+    var images = [
+        "https://raw.githubusercontent.com/ichte/Planets-Android-Learning/master/neptune.jpg"
+    ];
+   
+
+    function next() {
+        var slider = document.getElementById("slider");
+       
+        slider.src = images;
+    }
+
+   
+</script>
+</body>
+</html>

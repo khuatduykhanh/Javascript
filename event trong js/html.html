@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>event trong js</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+     <!-- cách một thêm sự kiện trực tiếp vào một thẻ -->
+     <input type="text" style="margin-left:100px; border-color: lightblue;" id="input_text" onkeyup="xem_kq()">   <!-- onkeyup là trình sử lý sự kiện xảy ra khi gõ , và nhả phím ra hàm này sẽ đc gọi đến -->
+     <div id="result" style="margin-left:100px"></div>
+     <script type="text/javascript">
+     	function xem_kq() { // hàm xem_kq này lấy giá trị cho thẻ input đưa vào thẻ div
+            // bắt lấy hai cái thẻ bằng id
+            var input_text = document.getElementById('input_text');
+            var result = document.getElementById('result');
+            // gán giá trị trong thẻ input
+            var giatri = input_text.value // gán giá trị trong thẻ input 
+            result.innerHTML = giatri;  //lấy giá trị ra và ghi vào thẻ div
+     		
+     	}
+     </script>
+     <!-- cách 2 thêm một chuỗi sự kiện vào nhiều thẻ html -->
+     <ul>
+          <li><a href="" class="dang2_js">khánh đẹp trai</a></li>
+          <li><a href="" class="dang2_js">khánh khú</a></li>
+          <li><a href="" class="dang2_js">thối tai </a></li>
+     </ul> 
+     <script type="text/javascript">
+          var list = document.getElementsByClassName('dang2_js')
+          for (var i = 0; i < list.length; i++) {
+               list[i].onclick = function(){
+                    alert('thêm event bằng gán js dạng 2')
+                    return false
+                    }
+          }
+     </script>
+     <!-- dạng 3 tạo một form và xét các đk để nhập form -->
+      <form>
+          <label for="email">User Name</label><br>
+          <input type="text" id="email" size="30"  /><br>
+          <label>Password</label><br>
+          <input type="Password" id="password" size="30" ><br>
+          <label>Nhập lại password</label><br>
+          <input type="Password" id="re_password" size="30" ><br>
+          <button type="submit" id="kiemtra" onclick="checkform()">Đăng ký</button>
+     </form>
+     <script type="text/javascript">
+          function checkform() {
+               var email = document.getElementById("email").value
+               var password = document.getElementById("password").value
+               var re_password = document.getElementById("re_password").value
+                    if(email==""){
+                         alert("xin mời nhập vào User Name")
+                    return false
+                    } //có thể thay thế bằng thuộc tính required trong bootrap
+                    if(email.length < 8 || email.length > 15){
+                         alert('yêu cầu nhập lại user name')
+                         return false
+                    }//có thể thay thế bằng thuộc tính required trong bootrap
+                    if(password.length < 8){
+                          alert("yêu cầu nhập lại mật khẩu")
+                         return false
+                         }//có thể thay thế bằng thuộc tính required bootrap
+                    if(password!= re_password){
+                         alert("mật khẩu không khớp")
+                         return false
+                         }
+               return true
+          }
+     </script> 
+     <!-- thêm một sử kiện vào input -->
+      <script type="text/javascript">
+           var input_email = document.getElementById('email')
+           input_email.addEventListener('keyup',function(){   // phuơng thức addEventListener là phương thức thêm sự kiện cho phần tử. addEventListener('tên của sự kiện-lưu ý bỏ on',hàm sử ls)
+                if(input_email.value.length > 15)
+                    alert('tên user name quá dài')
+               }
+               )
+      </script>
+ 
+</body>
+</html>
